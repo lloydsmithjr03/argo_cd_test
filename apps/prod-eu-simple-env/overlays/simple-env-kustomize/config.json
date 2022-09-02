@@ -1,1 +1,0 @@
-{"appName":"prod-eu-simple-env","userGivenName":"prod-eu-simple-env","destNamespace":"default","destServer":"https://kubernetes.default.svc","srcPath":"apps\\prod-eu-simple-env\\overlays\\simple-env-kustomize","srcRepoURL":"https://github.com/lloydsmithjr03/argo_cd_test.git","srcTargetRevision":"","labels":null}
