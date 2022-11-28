@@ -15,3 +15,7 @@ kind: Kustomization
 namespace: argocd
 resources:
 - github.com/argoproj-labs/argocd-autopilot/manifests/base?ref=v0.4.5
+- kustomized-helm-cmp.yml
+
+patchesStrategicMerge:
+  - argocd-repo-server.yaml
