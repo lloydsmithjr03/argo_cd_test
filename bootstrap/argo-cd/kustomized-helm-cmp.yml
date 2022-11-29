@@ -18,4 +18,4 @@ data:
         command: [sh, -c, "helm template ../../helm_base --name-template $ARGOCD_APP_NAME --include-crds > ../../helm_base/all.yml && kustomize build"]
       discover:
         find:
-          command: ["bash", "-c", "echo finding; cat $(find . -type f -name kustomization.y*ml) | grep helm_base"]
+          command: ["bash", "-c", "echo finding; find ../../helm_base -type f -name kustomization.y*ml"]
