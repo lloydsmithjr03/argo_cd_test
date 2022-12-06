@@ -19,3 +19,4 @@ resources:
 
 patchesStrategicMerge:
   - argocd-repo-server.yaml
+  - argocd-cm.yml
