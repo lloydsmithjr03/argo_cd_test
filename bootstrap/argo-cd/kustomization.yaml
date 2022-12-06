@@ -2,6 +2,7 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 configMapGenerator:
 - behavior: merge
   literals:
+  - kustomize.buildOptions=--enable-helm
   - |
     repository.credentials=- passwordSecret:
         key: git_token
@@ -10,6 +11,7 @@ configMapGenerator:
       usernameSecret:
         key: git_username
         name: autopilot-secret
+    
   name: argocd-cm
 kind: Kustomization
 namespace: argocd
@@ -19,4 +21,3 @@ resources:
 
 patchesStrategicMerge:
   - argocd-repo-server.yaml
-  - argocd-cm.yml
