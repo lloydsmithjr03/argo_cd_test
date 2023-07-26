@@ -1,0 +1,45 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "0"
+  creationTimestamp: null
+  name: opencti-deployment
+  namespace: default
+spec:
+  generators:
+    - git:
+        repoURL: https://bitbucket.org/lloydsmithjr03/opencti-deployment.git
+        revision: HEAD
+        directories:
+          - path: base/
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/managed-by: argocd-autopilot
+        app.kubernetes.io/name: opencti-deployment
+      name: k8s-opencti-deployment-{{ path.basename }}
+      namespace: default
+    spec:
+      destination:
+        namespace: default
+        name: '{{ path.basename }}'
+      ignoreDifferences:
+        - group: argoproj.io
+          jsonPointers:
+            - /status
+          kind: Application
+      project: k8s
+      source:
+        path: '{{ path }}'
+        repoURL: https://bitbucket.org/lloydsmithjr03/opencti-deployment.git
+        targetRevision: HEAD
+      syncPolicy:
+        syncOptions:
+          # workaround for: https://github.com/argoproj/argo-cd/issues/820
+          - ServerSideApply=true
+        automated:
+          allowEmpty: true
+          prune: true
+          selfHeal: true
+status: {}
